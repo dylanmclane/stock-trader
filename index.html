@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Main page
+{% endblock %}
+
+{% block main %}
+    <h1>Your Portfolio</h1>
+    <h2>Current account: {{ username }}</h2>
+    <h3>Cash balance: {{ balance | usd }}</h3>
+    <table id="stock-table">
+        <th>
+            Stock
+        </th>
+        <th>
+            Shares
+        </th>
+        <th>
+            Current Price (USD)
+        </th>
+        <th>
+            Total Value (USD)
+        </th>
+        {% for info in stocks %}
+        <tr>
+            <td>{{ info.stock }}</td>
+            <td>{{ info.tot_shares }}</td>
+            <td>{{ info.price }}</td>
+            <td>{{ info.tot_value }}</td>
+        </tr>
+        {% endfor %}
+        <tr></tr>
+        <br />
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td>Total assets</td>
+            <td>{{ grand_total | usd }}</td>
+        </tr>
+    </table>
+    <h2>
+        Buy more stocks
+    </h2>
+    <form action="/" method="post">
+        <select name="symbol" placeholder="Stock" required>
+            <option value="">Select a stock</option>
+            {% for stock in stocks %}
+                <option value="{{ stock.stock }}">{{ stock.stock }}</option>
+            {% endfor %}
+        </select>
+        <input type="number" name="shares" placeholder="Shares" min="1" required>
+        <button class="btn btn-primary" type="submit">Buy</button>
+    </form>
+{% endblock %}

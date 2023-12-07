@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Buy
+{% endblock %}
+{% block script %}
+    <!-- need to fix for conditions where required validation is hit -->
+    <!-- <script type="text/javascript" language="JavaScript">
+        counter = 0;
+        function stop() {
+            counter++;
+            if(counter > 1) {return false;}
+            return true;
+        }
+    </script> -->
+{% endblock %}
+
+{% block main %}
+    <h1>Purchase shares</h1>
+    <form action="/buy" method="post">
+        <input type="text" name="symbol" placeholder="Stock Symbol" required>
+        <input type="text" name="shares" placeholder="Shares" min="0" required>
+        <button class="btn btn-primary" type="submit" onClick="return stop()">Purchase</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Quote
+{% endblock %}
+
+{% block main %}
+    <h1>Search a stock price</h1>
+    <form action="/quote" method="post">
+        <input type="text" name="symbol" placeholder="Stock Symbol" required>
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    {% if stock %}
+        {% block p %}
+            A share of {{ stock.name }} is {{ stock.price | usd }}.
+        {% endblock %}
+    {% endif %}
+{% endblock %}
